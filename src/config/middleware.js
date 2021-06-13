@@ -6,17 +6,19 @@ const constants = require('../config/constants');
 const env = process.env.NODE_ENV;
 
 module.exports = app => {
-    if(typeof(app) === 'function'){
+    if (typeof(app) === 'function') {
+
+        app.disable('x-powered-by');
         app.use(express.json())
         app.use(express.urlencoded({
             extended: true
         }))
 
-        if(developConfig.PRODUCTION_TITLE){
+        if(app === developConfig.PRODUCTION_TITLE){
             //compression
         }
 
-        if(developConfig.DEVELOPMENT_TITLE){
+        if(app === developConfig.DEVELOPMENT_TITLE){
             const corsOptions = {
                 origin: '*',
                 exposeHeaders: [constants.TOKEN_HEADER]
